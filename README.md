@@ -1,6 +1,5 @@
 # Leetcode Daily
 This GitHub repository serves as a comprehensive collection of daily problem-solving solutions for LeetCode, a popular online platform for coding interviews and algorithmic challenges. Here, you will find a variety of meticulously crafted solutions to a wide range of LeetCode problems, all solved on a daily basis.
-This GitHub repository serves as a comprehensive collection of daily problem-solving solutions for LeetCode, a popular online platform for coding interviews and algorithmic challenges. Here, you will find a variety of meticulously crafted solutions to a wide range of LeetCode problems, all solved on a daily basis.
 
 # Purpose and Features
 The primary purpose of this repository is to document my progress and growth as a programmer by showcasing the problems I solve on a regular basis. By maintaining a daily problem-solving routine, I aim to enhance my algorithmic thinking skills, improve problem-solving strategies, and deepen my understanding of various data structures and algorithms.
