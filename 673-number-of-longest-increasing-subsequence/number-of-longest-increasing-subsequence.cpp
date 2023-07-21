@@ -6,7 +6,7 @@ public:
 
         vector<int> lengths(n, 1); 
         vector<int> counts(n, 1); 
-        vector<int> bit(n + 1, 0); 
+        // vector<int> bit(n + 1, 0); 
 
         int max_length = 1; 
 
