@@ -3,7 +3,6 @@ public:
     int countNumbersWithUniqueDigits(int n) {
         if(n==0)return 1;
         if(n==1)return 10;
-        vector<int>dp;
         int final=10;
         for(int k=2;k<=n;k++)
         {
