@@ -1,6 +1,6 @@
 class Solution {
 public:
-bool check(int i,string &s, unordered_map<string,int>&m,string curr, vector<unordered_map<string,bool>>&dp)
+bool check(int i,string &s, unordered_map<string,int>&m,string curr, unordered_map<int,unordered_map<string,int>>&dp)
 {
     curr+=s[i];
     if(dp[i].find(curr)!=dp[i].end())return dp[i][curr];
@@ -19,7 +19,8 @@ bool check(int i,string &s, unordered_map<string,int>&m,string curr, vector<unor
 }
     bool wordBreak(string s, vector<string>& w) {
         unordered_map<string,int>m;
-        vector<unordered_map<string,bool>>dp(s.size());
+        // vector<unordered_map<string,bool>>dp(s.size());
+        unordered_map<int,unordered_map<string,int>>dp;
         for(auto it:w)m[it]++;
         string curr;
         return check(0,s,m,curr,dp);
