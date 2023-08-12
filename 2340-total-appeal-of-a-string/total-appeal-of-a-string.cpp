@@ -1,12 +1,34 @@
 class Solution {
 public:
-    long long appealSum(string s) {
-    long long res = 0, cur = 0, prev[26] = {};
-    for (int i = 0; i < s.size(); ++i) {
-        cur += i + 1 - prev[s[i] - 'a'];
-        prev[s[i] - 'a'] = i + 1;
-        res += cur;
+    
+    // counting number of substrings that have atleast one char ch
+    // total substrings - count of substrings with no char as ch
+    long long int count(string st,char ch){ 
+        
+        long long int len=st.length();
+        long long int res=0;
+        long long int cnt=0;
+        for(long int i=0;i<len;i++){
+            
+            if(st[i]==ch){
+                res+=((cnt)*(cnt+1))/2;
+                cnt=0;
+            }
+            
+            else
+                cnt++;
+        }
+        
+        res+=((cnt)*(cnt+1))/2;
+        return (len*(len+1))/2 - res;
     }
-    return res;
-}
+    
+    long long appealSum(string st) {
+        
+        long long int total_cnt=0;
+        for(char ch='a';ch<='z';ch++)
+            total_cnt+=count(st,ch);
+        
+        return total_cnt;
+    }
 };
