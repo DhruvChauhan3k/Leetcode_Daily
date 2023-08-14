@@ -1,20 +1,37 @@
 class Solution {
 public:
-    int maximumCandies(vector<int>& candies, long long k) {
-    int l = 0, r = 10000000;
-    int ans=0;
-    while(l <r) {
-        long long m = (l + r+1) / 2, cnt = 0;
-        for (int i = 0; i < candies.size() && cnt < k; ++i)
-            cnt += candies[i] / m;
-        if (cnt >= k)
-        {
-                if(ans<m)ans=m;
-                l=m;
+    typedef long long ll;
+    
+    bool solve(vector<int>& v, ll mid, ll k){
+        int n = v.size();
+        ll cnt = 0;
+        for(int i=0;i<n;i++){
+            cnt += (v[i]/mid);
+            if(cnt>=k) return true;
         }
-        else
-            r = m - 1;
+        return false;
     }
-    return ans;
-}
+    
+    // v is the candies vector.
+    int maximumCandies(vector<int>& v, long long k) {
+        int n = v.size();
+		int mx = 0;
+        for(int i=0;i<n;i++){
+			mx = max(mx,v[i]);
+        }
+        
+        ll low = 1, high = mx;
+        ll ans = 0;
+        while(low<=high){
+            ll mid = (high+low)/2;
+            if(solve(v,mid,k)){
+                ans = mid;
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
 };
