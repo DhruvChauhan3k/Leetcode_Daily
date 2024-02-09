@@ -1,11 +1,12 @@
 int n,m;
+int dx[]={1,-1,0,0};
+int dy[]={0,0,1,-1};
 class Solution {
 public:
        void dfs(vector<vector<int>>&image,int i,int j,int oc,int &change)
        {
            image[i][j]=change;
-            int dx[]={1,-1,0,0};
-            int dy[]={0,0,1,-1};
+            
             for(int k=0;k<4;k++)
             {
                 int x=i+dx[k],y=j+dy[k];
