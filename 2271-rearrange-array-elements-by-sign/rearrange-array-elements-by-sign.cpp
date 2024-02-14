@@ -3,21 +3,27 @@ public:
     vector<int> rearrangeArray(vector<int>& nums) {
         vector<int>ans;
         int n=nums.size();
-        vector<int>pos;
-        vector<int>neg;
-        for(int i=0;i<n;i++)
+        int pos=0,neg=0;
+        while(pos<n or neg<n)
         {
-            if(nums[i]>=0){
-                pos.push_back(nums[i]);
+            if(pos<n)
+            {
+                while(pos<n and nums[pos]<0)pos++;
+                if(pos<n)
+                {
+                    ans.push_back(nums[pos]);
+                    pos++;
+                }
             }
-            else{
-            neg.push_back(nums[i]);
+            if(neg<n)
+            {
+                while(neg<n and nums[neg]>0)neg++;
+                if(neg<n)
+                {
+                  ans.push_back(nums[neg]);
+                  neg++;
+                }
             }
-        }
-        for(int i=0;i<n/2;i++)
-        {
-            ans.push_back(pos[i]);
-            ans.push_back(neg[i]);
         }
         return ans;
     }
