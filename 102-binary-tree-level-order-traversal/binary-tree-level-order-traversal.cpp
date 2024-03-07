@@ -11,22 +11,26 @@
  */
 class Solution {
 public:
-int height(TreeNode*root)
-{
-    if(root==NULL)return 0;
-    return max(height(root->right),height(root->left))+1;
-}
-void create(TreeNode*root,vector<vector<int>>&ans,int lvl)
-{
-    if(root==NULL)return;
-    ans[lvl].push_back(root->val);
-    create(root->left,ans,lvl+1);
-    create(root->right,ans,lvl+1);
-}
     vector<vector<int>> levelOrder(TreeNode* root) {
-        int h=height(root);
-        vector<vector<int>>ans(h);
-        create(root,ans,0);
+        if(root==NULL)return {};
+        queue<TreeNode*>q;
+        q.push(root);
+        vector<vector<int>>ans;
+        vector<int>temp;
+        while(!q.empty())
+        {
+            temp.clear();
+            int x=q.size();
+            for(int i=0;i<x;i++)
+            {
+                auto x=q.front();
+                q.pop();
+                temp.push_back(x->val);
+                if(x->left)q.push(x->left);
+                if(x->right)q.push(x->right);
+            }
+            ans.push_back(temp);
+        }
         return ans;
     }
 };
