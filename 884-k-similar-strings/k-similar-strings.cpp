@@ -2,7 +2,7 @@ class Solution {
 public:
     unordered_set<string> set;
     int n;
-    int kSimilarity(string s1, string s2) {
+    int kSimilarity(string &s1, string &s2) {
         n = s1.size();
         if(s1 == s2) return 0;
         queue<string> q;
