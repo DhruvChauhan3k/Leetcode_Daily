@@ -17,7 +17,6 @@ public:
     }
     int minEatingSpeed(vector<int>& p, int h) {
         int s=1,e=0;
-        sort(p.begin(),p.end());
         for(auto it:p)e=max(e,it);
         int ans=1e9;
         while(s<=e)
