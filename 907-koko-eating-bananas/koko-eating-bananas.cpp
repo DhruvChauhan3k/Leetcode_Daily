@@ -1,32 +1,34 @@
 class Solution {
 public:
-     long long int check(int x,vector<int>&piles)
-     {
-         long long int time=0;
-         for(auto it:piles)
-         {
-            time+=it/x;
-            if(it%x!=0)time++;
-         }
-         return time;
-     }
-    int minEatingSpeed(vector<int>& piles, int h) {
+    bool check(int x,vector<int>&p,int h)
+    {
+       long long int cnt=0,n=p.size(),i=0;
+       while(i<n)
+       {
+        if(p[i]>x)
+        {
+            if(p[i]%x!=0)cnt++;
+           cnt+=((p[i])/x);
+        }
+        else cnt++;
+        i++;
+       }
+       return cnt<=h;
+    }
+    int minEatingSpeed(vector<int>& p, int h) {
         int s=1,e=0;
-        for(auto it:piles)e=max(e,it);
+        sort(p.begin(),p.end());
+        for(auto it:p)e=max(e,it);
         int ans=1e9;
         while(s<=e)
         {
-             int mid=(s+e)/2;
-             long long int a=check(mid,piles);
-             if(a<=h)
-             {
-                 ans=min(ans,mid);
-                 e=mid-1;
-             }
-             else
-             {
-                 s=mid+1;
-             }
+            int mid=s+(e-s)/2;
+            if(check(mid,p,h))
+            {
+                e=mid-1;
+                ans=min(ans,mid);
+            }
+            else s=mid+1;
         }
         return ans;
     }
