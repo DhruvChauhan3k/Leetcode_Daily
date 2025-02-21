@@ -4,7 +4,6 @@ public:
         vector<int>v(n,0);
         vector<vector<int>>adj(n);
         queue<int>q;
-        vector<int>order;
         for(auto it:pre)
         {
             adj[it[1]].push_back(it[0]);
@@ -15,7 +14,6 @@ public:
             if(v[i]==0)
             {
                 q.push(i);
-                order.push_back(i);
             }
         }
         while(!q.empty())
@@ -28,11 +26,13 @@ public:
                if(v[it]==0)
                {
                    q.push(it);
-                   order.push_back(it);
                }
            }
         }
-        if(order.size()!=n)return false;
+        for(int i=0;i<n;i++)
+        {
+            if(v[i]!=0)return false;
+        }
         return true;
     }
 };
