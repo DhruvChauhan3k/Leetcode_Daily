@@ -11,18 +11,15 @@ public:
           dp[j][m]=0;
         }
 
-        int ans=0;
         for(int i=n;i>=0;i--){
             for(int j=m;j>=0;j--)
             {
                 if(dp[i][j]!=-1)continue;
                 if(text1[i]==text2[j]){
                     dp[i][j]= 1+dp[i+1][j+1];
-                    ans=max(ans,dp[i][j]);
                     continue;
                 }
                 dp[i][j]= max(dp[i+1][j],dp[i][j+1]);
-                ans=max(dp[i][j],ans);
             }
         }
 
