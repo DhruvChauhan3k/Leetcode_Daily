@@ -1,49 +1,42 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        unordered_map<char,int>m1,m2;
-        int cnt1=0,cnt2=0;
+        int cnt=0;
+        unordered_map<char,int>m,n;
         for(auto it:t)
         {
-            if(m2[it]>0)
-            {
-                m2[it]++;
-            }
-            else
-            {
-                m2[it]=1;
-                cnt2++;
-            }
+            if(m.find(it)==m.end())cnt++;
+            m[it]++;
         }
-        int len=INT_MAX;
-        int fst=0,cst=0;
-        for(int i=0;i<s.size();i++)
+        int st=0,e=0,ans=1e9,now=0;
+        int fs=0,fe=0;
+        string fin;
+        while(e<s.size())
         {
-           char it=s[i];
-           m1[it]++;
-            if(m2[it]==m1[it])
+            n[s[e]]++;
+            if(n[s[e]]==m[s[e]])now++;
+            while(cnt==now)
             {
-                cnt1++;
-            }
-            if(cnt1==cnt2)
-            {
-            while(cnt1==cnt2)
-            {
-                if(len>i-cst+1)
+                if(e+1-st<ans)
                 {
-                    fst=cst;
-                    len=i-cst+1;
+                    fs=st;
+                    fe=e;
                 }
-                m1[s[cst]]--;
-                if(m1[s[cst]]<m2[s[cst]])
+                ans=min(ans,(e+1-st));
+                n[s[st]]--;
+                if(n[s[st]]<m[s[st]])
                 {
-                    cnt1--;
+                    now--;
                 }
-                cst++;
+                st++;
             }
-            }
+            e++;
         }
-        if(len==INT_MAX)return "";
-        return s.substr(fst,len);
+        if(ans==1e9)return "";
+        for(int i=fs;i<=fe;i++)
+        {
+           fin+=s[i];
+        }
+        return fin;
     }
 };
