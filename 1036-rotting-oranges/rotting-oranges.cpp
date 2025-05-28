@@ -21,8 +21,7 @@ public:
         {
             auto it=q.front();
             q.pop();
-            int time=it.first;
-            ans=max(ans,time);
+            ans=it.first;
             int i=it.second.first,j=it.second.second;
             for(int k=0;k<4;k++)
             {
@@ -30,7 +29,7 @@ public:
                 if(x<n and x>=0 and y<m and y>=0 and grid[x][y]==1)
                 {
                     grid[x][y]=2;
-                    q.push({time+1,{x,y}});
+                    q.push({ans+1,{x,y}});
                 }
             }
         }
