@@ -1,6 +1,6 @@
 class Solution {
 public:
-void check(vector<vector<int>>&ans,vector<int>temp,int i,vector<int>& c, int t)
+void check(vector<vector<int>>&ans,vector<int>&temp,int i,vector<int>& c, int t)
 {
     if(i==c.size() or t<0)return;
     if(t==0)
@@ -11,7 +11,7 @@ void check(vector<vector<int>>&ans,vector<int>temp,int i,vector<int>& c, int t)
     check(ans,temp,i+1,c,t);
     temp.push_back(c[i]);
     check(ans,temp,i,c,t-c[i]);
-    // temp.pop_back();
+    temp.pop_back();
 
 }
     vector<vector<int>> combinationSum(vector<int>& c, int t) {
