@@ -1,38 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
     int n;
-    int ans;                               // global minimum of path-maxima
-    const int INF = 1e9;
     vector<vector<int>> g;
-    vector<vector<int>> best;              // best[r][c] = lowest path-maximum seen so far
-    int dir[4][2]{{1,0},{-1,0},{0,1},{0,-1}};
     
-    void dfs(int r, int c, int curMax) {
-        curMax = max(curMax, g[r][c]);     // update running maximum
-        if (curMax >= ans) return;         // prune – cannot beat current best
+    // --- can we reach (n-1,n-1) if the water is at level t? (standard BFS) ---
+    bool canReach(int t) {
+        if (g[0][0] > t) return false;          // start already under water
+        queue<pair<int,int>> q;
+        vector<vector<int>> vis(n, vector<int>(n, 0));
         
-        if (r == n - 1 && c == n - 1) {    // reached target
-            ans = curMax;                  // update answer
-            return;
-        }
+        q.emplace(0, 0);
+        vis[0][0] = 1;
+        int dr[4] = {1, -1, 0, 0};
+        int dc[4] = {0, 0, 1, -1};
         
-        for (auto& d : dir) {
-            int nr = r + d[0], nc = c + d[1];
-            if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
-            if (curMax >= best[nr][nc]) continue; // seen a better or equal way before
-            best[nr][nc] = curMax;
-            dfs(nr, nc, curMax);
+        while (!q.empty()) {
+            auto [r, c] = q.front(); q.pop();
+            if (r == n - 1 && c == n - 1) return true;     // reached goal
+            
+            for (int k = 0; k < 4; ++k) {
+                int nr = r + dr[k], nc = c + dc[k];
+                if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
+                if (vis[nr][nc] || g[nr][nc] > t) continue; // blocked or already seen
+                vis[nr][nc] = 1;
+                q.emplace(nr, nc);
+            }
         }
+        return false;                                      // no path at this t
     }
-    
+
 public:
     int swimInWater(vector<vector<int>>& grid) {
-        g = std::move(grid);
-        n   = g.size();
-        ans = INF;
-        best.assign(n, vector<int>(n, INF));
+        g.swap(grid);
+        n = g.size();
         
-        best[0][0] = g[0][0];
-        dfs(0, 0, 0);
-        return ans;
+        int lo = max(g[0][0], g[n-1][n-1]);   // water must be at least this high
+        int hi = n * n - 1;                   // max possible elevation
+        
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (canReach(mid)) hi = mid;      // path exists → try lower water
+            else               lo = mid + 1;  // need deeper water
+        }
+        return lo;                            // == hi
     }
 };
