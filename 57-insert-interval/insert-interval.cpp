@@ -1,54 +1,26 @@
 class Solution {
 public:
-    // Find first interval where end >= target
-    int firstEndGE(const vector<vector<int>>& intervals, int target) {
-        int low = 0, high = intervals.size();
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (intervals[mid][1] >= target)
-                high = mid;
-            else
-                low = mid + 1;
-        }
-        return low;
-    }
-
-    // Find first interval where start > target
-    int firstStartGT(const vector<vector<int>>& intervals, int target) {
-        int low = 0, high = intervals.size();
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (intervals[mid][0] > target)
-                high = mid;
-            else
-                low = mid + 1;
-        }
-        return low;
-    }
-
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        vector<vector<int>> result;
-        int n = intervals.size();
-
-        // 1. Find left part (non-overlapping)
-        int left = firstEndGE(intervals, newInterval[0]);
-        for (int i = 0; i < left; ++i) {
-            result.push_back(intervals[i]);
-        }
-
-        // 2. Merge overlapping intervals
-        int right = firstStartGT(intervals, newInterval[1]);
-        for (int i = left; i < right; ++i) {
+   vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        int n = intervals.size(), i = 0;
+        vector<vector<int>> res;
+        //case 1: no overlapping case before the merge intervals
+		//compare ending point of intervals to starting point of newInterval
+        while(i < n && intervals[i][1] < newInterval[0]){
+            res.push_back(intervals[i]);
+            i++;
+        }                           
+		//case 2: overlapping case and merging of intervals
+        while(i < n && newInterval[1] >= intervals[i][0]){
             newInterval[0] = min(newInterval[0], intervals[i][0]);
             newInterval[1] = max(newInterval[1], intervals[i][1]);
+            i++;
         }
-        result.push_back(newInterval);
-
-        // 3. Append remaining intervals
-        for (int i = right; i < n; ++i) {
-            result.push_back(intervals[i]);
+        res.push_back(newInterval);
+        // case 3: no overlapping of intervals after newinterval being merged
+        while(i < n){
+            res.push_back(intervals[i]);
+            i++;
         }
-
-        return result;
+        return res;
     }
 };
