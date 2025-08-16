@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+    ListNode* mergeTwoLists(ListNode* &list1, ListNode* &list2) {
         if(list1==NULL and list2==NULL)return NULL;
         if(list1==NULL)return list2;
         if(list2==NULL)return list1;
