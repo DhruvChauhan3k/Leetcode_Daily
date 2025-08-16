@@ -1,16 +1,12 @@
 class Solution {
 public:
-    bool check(int x,vector<int>&p,int h)
+    bool check(int &x,vector<int>&p,int &h)
     {
-       long long int cnt=0,n=p.size(),i=0;
+       double cnt=0,n=p.size(),i=0;
        while(i<n)
        {
-        if(p[i]>x)
-        {
-            if(p[i]%x!=0)cnt++;
-           cnt+=((p[i])/x);
-        }
-        else cnt++;
+        if(p[i]%x!=0)cnt++;
+        cnt+=((p[i])/x);
         i++;
        }
        return cnt<=h;
