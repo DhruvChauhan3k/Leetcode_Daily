@@ -8,15 +8,10 @@ public:
         {
             if(m.find(s[i])!=m.end() and m[s[i]]>=last)
             {
-                 maxi=max(maxi,i-last);
                  last=m[s[i]]+1;
             }
             m[s[i]]=i;
-        }
-        if(last!=s.size())
-        {
-            int n=s.size();
-            maxi=max(maxi,n-last);
+            maxi=max(maxi,i-last+1);
         }
         return maxi;
     }
