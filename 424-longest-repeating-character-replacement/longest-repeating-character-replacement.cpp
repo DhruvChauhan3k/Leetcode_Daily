@@ -12,7 +12,7 @@ public:
             maxf = max(maxf, alphabets[s[right]]);
 
              if((right - left + 1) - maxf > k) {
-                alphabets[s[left]] -= 1;
+                alphabets[s[left]]--;
                 left++;
             } 
             ans = max(ans, (right - left + 1));
