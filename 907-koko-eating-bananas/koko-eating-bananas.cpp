@@ -2,7 +2,7 @@ class Solution {
 public:
     bool check(int &x,vector<int>&p,int &h)
     {
-       double cnt=0,n=p.size(),i=0;
+       long long cnt=0,n=p.size(),i=0;
        while(i<n)
        {
         if(p[i]%x!=0)cnt++;
