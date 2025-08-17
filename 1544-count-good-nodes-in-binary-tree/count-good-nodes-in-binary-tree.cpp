@@ -20,6 +20,6 @@ public:
     }
     int goodNodes(TreeNode* root) {
         if(root==NULL)return 0;
-        return 1+check(root->left,root->val)+check(root->right,root->val);
+        return check(root,root->val);
     }
 };
