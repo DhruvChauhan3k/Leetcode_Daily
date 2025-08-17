@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int check(TreeNode*root,int max){
+    int check(TreeNode*&root,int max){
         if(root==NULL)return 0;
         if(root->val>=max){
             return 1+check(root->left,root->val)+check(root->right,root->val);
