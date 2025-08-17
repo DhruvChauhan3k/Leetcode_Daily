@@ -11,42 +11,17 @@
  */
 class Solution {
 public:
-bool ans;
-    pair<int,int> check(TreeNode*root)
+    bool check(TreeNode*root, long long  maxi, long long  mini)
     {
-        if(root==NULL)return {INT_MAX,INT_MIN};
-        if(root->left==NULL and root->right==NULL)return {root->val,root->val};
-        if(root->right==NULL)
+        if(root==NULL)return true;
+        if(root->val<maxi and root->val>mini)
         {
-            pair<int,int>l=check(root->left);
-           if(l.second>=root->val)
-           {
-               ans=false;
-           }
-           return {min(l.first,root->val),max(l.second,root->val)};
+            return check(root->left,root->val,mini) and check(root->right,maxi,root->val);
         }
-        if(root->left==NULL)
-        {
-            pair<int,int>r=check(root->right);
-           if(r.first<=root->val)
-           {
-               ans=false;
-           }
-           return {min(r.first,root->val),max(r.second,root->val)};
-        }
-        pair<int,int>l=check(root->left);
-        pair<int,int>r=check(root->right);
-        if(root->val<=l.second or root->val>=r.first)
-        {
-            ans=false;
-        }
-        int mini=min(root->val,min(l.first,r.first));
-        int maxi=max(root->val,max(r.second,l.second));
-        return {mini,maxi};
-    }
+        return false;
+    } 
     bool isValidBST(TreeNode* root) {
-        ans=true;
-        check(root);
-        return ans;
+        long long  mini=-1e10,maxi=1e10;
+        return check(root->left,root->val,mini) and check(root->right,maxi,root->val);
     }
 };
