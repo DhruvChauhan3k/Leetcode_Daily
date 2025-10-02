@@ -11,18 +11,18 @@
  */
 class Solution {
 public:
-    int check(TreeNode*root,int &sum)
-    {
-        if(root==NULL)return 1;
-        int l=check(root->left,sum);
-        int r=check(root->right,sum);
-        if(l==0 or r==0){sum++;return 2;}
-        else if(l==2 or r==2)return 1;
-        else return 0;
-    }
+        int res = 0;
     int minCameraCover(TreeNode* root) {
-        int sum=0;
-        if(check(root,sum)==0)sum++;
-        return sum;
+        return (dfs(root) == 0 ? 1 : 0) + res;
+    }
+
+    int dfs(TreeNode* root) {
+        if (!root) return 2;
+        int left = dfs(root->left), right = dfs(root->right);
+        if (left == 0 || right == 0) {
+            res++;
+            return 1;
+        }
+        return left == 1 || right == 1 ? 2 : 0;
     }
 };
