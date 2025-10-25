@@ -1,7 +1,6 @@
 class Solution {
 public:
     int totalMoney(int n) {
-        int rem=n%7;
         int ni=n/7;
         int ans=0,now=28;
         while(ni){
@@ -10,8 +9,9 @@ public:
             now+=7;
         }
         ni=1+n/7;
-        while(rem){
-           rem--;
+        now=n%7;
+        while(now){
+           now--;
            ans+=(ni);
            ni++;
         }
