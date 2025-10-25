@@ -1,17 +1,21 @@
 class Solution {
     public int totalMoney(int n) {
-        int prevMon=0,last=0;
-        int nowInd=1;
-        int ans=0;
-        while(nowInd<=n){
-           if(nowInd%7==1){
-             prevMon++;
-             last=prevMon;
-           }
-             ans+=(last);
-             last++;
-             nowInd++;
+         int ni=n/7;
+        int ans=0,now=28;
+        while(ni>0){
+            ans+=now;
+            ni--;
+            now+=7;
         }
+        ni=1+n/7;
+        now=n%7;
+        while(now>0){
+           now--;
+           ans+=(ni);
+           ni++;
+        }
+
         return ans;
+
     }
 }
