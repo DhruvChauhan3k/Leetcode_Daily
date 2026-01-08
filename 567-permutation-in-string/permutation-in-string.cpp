@@ -17,16 +17,16 @@ public:
         while(j<s2.size()){
             freqS2[s2[j]-'a']++;
             
-            if(j-i+1==s1.size()){
-                if(areVectorsEqual(freqS1, freqS2)) return true;
-            }
-            
-            if(j-i+1<s1.size()) j++;
-            else{
+            while(freqS2[s2[j]-'a']>freqS1[s2[j]-'a']){
                 freqS2[s2[i]-'a']--;
                 i++;
-                j++;
             }
+            
+            if(j-i+1==s1.size()){
+                return true;
+            }
+            
+            j++;
         }
         return false;
     }
