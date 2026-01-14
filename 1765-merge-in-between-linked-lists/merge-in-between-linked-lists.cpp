@@ -25,8 +25,7 @@ public:
                 
         list1->next=list2;
         while(list2->next!=NULL)list2=list2->next;
-        ListNode*x=temp2;
-        list2->next=x->next;
+        list2->next=temp2->next;
         temp2->next=NULL;
         return temp;
     }
